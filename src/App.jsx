@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext } from 'react';
 
 import ListElement from './components/ListElement/ListElement';
-import Form from './containers/Form/Form';
+import TaskForm from './containers/TaskForm/TaskForm';
 import List from './components/List/List';
 
 import './style.css';
@@ -12,7 +12,7 @@ function App() {
   const taskInitialState = {
     id: null,
     title: '',
-    category: null,
+    completed: false,
   };
 
   const [tasks, setTasks] = useState(() => JSON.parse(localStorage.getItem('tasks')) || []);
@@ -22,20 +22,20 @@ function App() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
-  useEffect(() => {
-    console.log(task);
-  }, [task]);
+  // useEffect(() => {
+  //   console.log(task);
+  // }, [task]);
 
   return (
     <>
       <h1>To-Do List</h1>
 
       <FormContext.Provider value={{ task, tasks, setTask, setTasks, taskInitialState }}>
-        <Form inputPlaceholder="What do you want to do?" buttonText="Add" />
+        <TaskForm inputPlaceholder="What do you want to do?" buttonText="Add" />
 
         <List>
           {tasks.map((task, key) => (
-            <ListElement key={key} value={task.title} id={task.id} />
+            <ListElement key={key} task={{ ...task }} />
           ))}
         </List>
       </FormContext.Provider>

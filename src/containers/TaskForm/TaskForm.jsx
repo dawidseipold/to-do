@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledForm } from './Form.style';
+import { StyledForm } from './TaskForm.style';
 
 import Button from '../../components/Button/Button';
 import Input from '../../components/Input/Input';
